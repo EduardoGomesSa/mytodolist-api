@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
@@ -29,5 +30,17 @@ class TaskController extends Controller
         $resource = new TaskResource($task);
 
         return $resource->response()->setStatusCode(201);
+    }
+
+    public function destroy(TaskDeleteRequest $request){
+        $taskExist = $this->task->find($request->id);
+
+        if($taskExist == null) return response(['error'=>'task don´t exist'])->setStatusCode(404);
+
+        $taskDestroyed = $taskExist->delete();
+
+        if(!$taskDestroyed) return response(['error'=>'task don´t was excluded'])->setStatusCode(401);
+        
+        return response(['message'=>'task deleted'])->setStatusCode(200);
     }
 }
