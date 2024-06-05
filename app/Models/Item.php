@@ -13,5 +13,6 @@ class Item extends Model
         'name',
         'description',
         'status',
+        'task_id',
     ];
 }
