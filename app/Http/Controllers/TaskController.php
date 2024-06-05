@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
+use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -41,6 +42,18 @@ class TaskController extends Controller
 
         if(!$taskDestroyed) return response(['error'=>'task don´t was excluded'])->setStatusCode(401);
         
-        return response(['message'=>'task deleted'])->setStatusCode(200);
+        return response(['message'=>'task deleted with success'])->setStatusCode(200);
+    }
+
+    public function update(TaskUpdateRequest $request){
+        $taskExist = $this->task->find($request->id);
+
+        if($taskExist == null) return response(['error'=>'task don´t exist'])->setStatusCode(404);
+
+        $taskUpdated = $taskExist->update($request->all());
+
+        if(!$taskUpdated) return response(['error'=>'task don´t was updated'])->setStatusCode(401);
+
+        return response(['message'=>'tast updated with success'])->setStatusCode(200);
     }
 }
