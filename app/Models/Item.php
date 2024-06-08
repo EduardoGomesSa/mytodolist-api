@@ -15,4 +15,8 @@ class Item extends Model
         'status',
         'task_id',
     ];
+
+    public function task(){
+        return $this->belongsTo(Task::class);
+    }
 }

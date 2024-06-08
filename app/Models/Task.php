@@ -16,4 +16,8 @@ class Task extends Model
         'end_date',
         'status',
     ];
+
+    public function items(){
+        return $this->hasMany(Item::class);
+    }
 }

@@ -25,11 +25,15 @@ class TaskController extends Controller
     }
 
     public function store(TaskRequest $request){
-        $task = $this->task->create($request->all());
+        $taskCreated = $this->task->create($request->all());
 
-        if($task == null) return response(['error'=>'task wasn´t created'])->setStatusCode(401);
+        if($taskCreated == null) return response(['error'=>'task wasn´t created'])->setStatusCode(401);
 
-        $resource = new TaskResource($task);
+        if($request->items){
+            $taskCreated->items()->createMany($request->items);
+        }
+
+        $resource = new TaskResource($taskCreated);
 
         return $resource->response()->setStatusCode(201);
     }
