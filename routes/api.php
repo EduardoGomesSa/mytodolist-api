@@ -16,3 +16,4 @@ Route::put('/tasks', [TaskController::class, 'update']);
 Route::put('/tasks', [TaskController::class, 'updateStatus']);
 
 Route::get('/items', [ItemController::class, 'index']);
+Route::post('/items', [ItemController::class, 'store']);
