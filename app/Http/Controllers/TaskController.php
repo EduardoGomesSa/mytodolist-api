@@ -43,9 +43,9 @@ class TaskController extends Controller
 
         if($taskExist == null) return response(['error'=>'task does not exist'])->setStatusCode(404);
 
-        $taskDestroyed = $taskExist->delete();
+        $taskDeleted = $taskExist->delete();
 
-        if(!$taskDestroyed) return response(['error'=>'task does not was excluded'])->setStatusCode(401);
+        if(!$taskDeleted) return response(['error'=>'task does not was deleted'])->setStatusCode(401);
         
         return response(['message'=>'task deleted with success'])->setStatusCode(200);
     }

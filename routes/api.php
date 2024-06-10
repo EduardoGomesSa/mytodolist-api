@@ -19,3 +19,4 @@ Route::get('/items', [ItemController::class, 'index']);
 Route::post('/items', [ItemController::class, 'store']);
 Route::put('/items', [ItemController::class, 'update']);
 Route::put('/items/status', [ItemController::class, 'updateStatus']);
+Route::delete('/items', [ItemController::class, 'destroy']);
