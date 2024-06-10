@@ -27,7 +27,7 @@ class TaskController extends Controller
     public function store(TaskRequest $request){
         $taskCreated = $this->task->create($request->all());
 
-        if($taskCreated == null) return response(['error'=>'task wasn´t created'])->setStatusCode(401);
+        if($taskCreated == null) return response(['error'=>'task does not was created'])->setStatusCode(401);
 
         if($request->items){
             $taskCreated->items()->createMany($request->items);
@@ -41,11 +41,11 @@ class TaskController extends Controller
     public function destroy(TaskDeleteRequest $request){
         $taskExist = $this->task->find($request->id);
 
-        if($taskExist == null) return response(['error'=>'task don´t exist'])->setStatusCode(404);
+        if($taskExist == null) return response(['error'=>'task does not exist'])->setStatusCode(404);
 
         $taskDestroyed = $taskExist->delete();
 
-        if(!$taskDestroyed) return response(['error'=>'task don´t was excluded'])->setStatusCode(401);
+        if(!$taskDestroyed) return response(['error'=>'task does not was excluded'])->setStatusCode(401);
         
         return response(['message'=>'task deleted with success'])->setStatusCode(200);
     }
@@ -53,11 +53,11 @@ class TaskController extends Controller
     public function update(TaskUpdateRequest $request){
         $taskExist = $this->task->find($request->id);
 
-        if($taskExist == null) return response(['error'=>'task don´t exist'])->setStatusCode(404);
+        if($taskExist == null) return response(['error'=>'task does not exist'])->setStatusCode(404);
 
         $taskUpdated = $taskExist->update($request->all());
 
-        if(!$taskUpdated) return response(['error'=>'task don´t was updated'])->setStatusCode(401);
+        if(!$taskUpdated) return response(['error'=>'task does not was updated'])->setStatusCode(401);
 
         return response(['message'=>'tast updated with success'])->setStatusCode(200);
     }
@@ -65,11 +65,11 @@ class TaskController extends Controller
     public function updateStatus(TaskUpdateStatusRequest $request){
         $taskExist = $this->task->find($request->id);
 
-        if($taskExist == null) return response(['error'=>'status task don´t exist'])->setStatusCode(404);
+        if($taskExist == null) return response(['error'=>'status task does not exist'])->setStatusCode(404);
 
         $taskUpdated = $taskExist->update($request->all());
 
-        if(!$taskUpdated) return response(['error'=>'status task don´t was updated'])->setStatusCode(401);
+        if(!$taskUpdated) return response(['error'=>'status task does not was updated'])->setStatusCode(401);
 
         return response(['message'=>'status task updated with success'])->setStatusCode(200);
     }

@@ -13,8 +13,9 @@ Route::get('/tasks', [TaskController::class, 'index']);
 Route::post('/tasks', [TaskController::class, 'store']);
 Route::delete('/tasks', [TaskController::class, 'destroy']);
 Route::put('/tasks', [TaskController::class, 'update']);
-Route::put('/tasks', [TaskController::class, 'updateStatus']);
+Route::put('/tasks/status', [TaskController::class, 'updateStatus']);
 
 Route::get('/items', [ItemController::class, 'index']);
 Route::post('/items', [ItemController::class, 'store']);
 Route::put('/items', [ItemController::class, 'update']);
+Route::put('/items/status', [ItemController::class, 'updateStatus']);

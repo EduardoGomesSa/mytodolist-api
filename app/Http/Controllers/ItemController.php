@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
+use App\Http\Requests\ItemUpdateStatusRequest;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
 
@@ -24,7 +25,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request){
         $itemCreated = $this->item->create($request->all());
 
-        if(!$itemCreated) return response(['error'=>'Item wasn´t created'])->setStatusCode(401);
+        if(!$itemCreated) return response(['error'=>'item does not was created'])->setStatusCode(401);
 
         $resource = new ItemResource($itemCreated);
 
@@ -34,12 +35,24 @@ class ItemController extends Controller
     public function update(ItemUpdateRequest $request){
         $itemExist = $this->item->find($request->id);
 
-        if(!$itemExist) return response(['error'=>'Item don´t exist'])->setStatusCode(404);
+        if(!$itemExist) return response(['error'=>'item does not exist'])->setStatusCode(404);
 
         $itemUpdated = $itemExist->update($request->all());
 
-        if(!$itemUpdated) return response(["error"=>"Item don´t was updated"])->setStatusCode(401);
+        if(!$itemUpdated) return response(["error"=>"item does not was updated"])->setStatusCode(401);
 
-        return response(["message"=>"Item updated with success"])->setStatusCode(200);
+        return response(["message"=>"item updated with success"])->setStatusCode(200);
+    }
+
+    public function updateStatus(ItemUpdateStatusRequest $request){
+        $itemExist = $this->item->find($request->id);
+
+        if(!$itemExist) return response(["error"=>"item does not exist"])->setStatusCode(404);
+
+        $itemUpdated = $itemExist->update($request->all());
+
+        if(!$itemUpdated) return response(["error"=>"item does not updated"])->setStatusCode(401);
+
+        return response(["message"=>"status item updated with success"])->setStatusCode(200);
     }
 }
