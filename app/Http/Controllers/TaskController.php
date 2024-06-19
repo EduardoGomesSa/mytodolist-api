@@ -8,14 +8,17 @@ use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Requests\TaskUpdateStatusRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use App\Services\TaskService;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
     protected $task;
+    private $service;
 
-    public function __construct(Task $task) {
+    public function __construct(Task $task, TaskService $service) {
         $this->task = $task;
+        $this->service = $service;
     }
 
     public function index(){
@@ -25,17 +28,11 @@ class TaskController extends Controller
     }
 
     public function store(TaskRequest $request){
-        $taskCreated = $this->task->create($request->all());
+        $taskCreated = $this->service->store($request);
 
-        if($taskCreated == null) return response(['error'=>'task does not was created'])->setStatusCode(401);
+        if(!$taskCreated) return response(['error'=>'task does not was created'])->setStatusCode(401);
 
-        if($request->items){
-            $taskCreated->items()->createMany($request->items);
-        }
-
-        $resource = new TaskResource($taskCreated);
-
-        return $resource->response()->setStatusCode(201);
+        return $taskCreated->response()->setStatusCode(201);
     }
 
     public function destroy(TaskDeleteRequest $request){
