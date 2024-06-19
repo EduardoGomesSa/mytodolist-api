@@ -36,11 +36,7 @@ class TaskController extends Controller
     }
 
     public function destroy(TaskDeleteRequest $request){
-        $taskExist = $this->task->find($request->id);
-
-        if($taskExist == null) return response(['error'=>'task does not exist'])->setStatusCode(404);
-
-        $taskDeleted = $taskExist->delete();
+        $taskDeleted = $this->service->destroy($request);
 
         if(!$taskDeleted) return response(['error'=>'task does not was deleted'])->setStatusCode(401);
         
