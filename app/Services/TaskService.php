@@ -41,7 +41,7 @@ class TaskService{
     }
 
     public function update(TaskUpdateRequest $request){
-        $taskExist = $this->task->find($request->id);
+        $taskExist = $this->repository->getById($request->id);
 
         if(!$taskExist) return false;
 
@@ -53,7 +53,7 @@ class TaskService{
     }
 
     public function updateStatus(TaskUpdateStatusRequest $request){
-        $taskExist = $this->task->find($request->id);
+        $taskExist = $this->repository->getById($request->id);
 
         if($taskExist == null) return false;
 
@@ -65,7 +65,7 @@ class TaskService{
     }
 
     public function destroy(TaskDeleteRequest $request){
-        $taskExist = $this->getById($request->id);
+        $taskExist = $this->repository->getById($request->id);
 
         if(!$taskExist) return false;
 
@@ -74,13 +74,5 @@ class TaskService{
         if($taskDeleted > 0) return true;
         
         return false;
-    }
-
-    private function getById(int $id){
-        $task = $this->task->find($id);
-
-        if(!$task) return null;
-
-        return $task;
     }
 }
