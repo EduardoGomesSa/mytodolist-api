@@ -13,11 +13,9 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    protected $task;
     private $service;
 
-    public function __construct(Task $task, TaskService $service) {
-        $this->task = $task;
+    public function __construct(TaskService $service) {
         $this->service = $service;
     }
 

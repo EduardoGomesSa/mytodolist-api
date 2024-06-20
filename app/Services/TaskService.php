@@ -22,14 +22,6 @@ class TaskService{
         );
     }
 
-    public function getById(int $id){
-        $task = $this->task->find($id);
-
-        if(!$task) return null;
-
-        return $task;
-    }
-
     public function store(TaskRequest $request){
         $taskCreated = $this->task->create($request->all());
 
@@ -79,5 +71,13 @@ class TaskService{
         if($taskDeleted > 0) return true;
         
         return false;
+    }
+
+    private function getById(int $id){
+        $task = $this->task->find($id);
+
+        if(!$task) return null;
+
+        return $task;
     }
 }
