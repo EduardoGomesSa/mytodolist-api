@@ -6,10 +6,7 @@ use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Requests\TaskUpdateStatusRequest;
-use App\Http\Resources\TaskResource;
-use App\Models\Task;
 use App\Services\TaskService;
-use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
