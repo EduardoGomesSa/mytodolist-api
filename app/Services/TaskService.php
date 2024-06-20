@@ -8,17 +8,20 @@ use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Requests\TaskUpdateStatusRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use App\Repositories\TaskRepository;
 
 class TaskService{
     private $task;
+    private TaskRepository $repository;
 
-    public function __construct(Task $task) {
+    public function __construct(Task $task, TaskRepository $repository) {
         $this->task = $task;
+        $this->repository = $repository;
     }
 
     public function index(){
         return TaskResource::collection(
-            $this->task->all(),
+            $this->repository->index(),
         );
     }
 
