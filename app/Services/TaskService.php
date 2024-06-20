@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskUpdateRequest;
+use App\Http\Requests\TaskUpdateStatusRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 
@@ -42,6 +43,18 @@ class TaskService{
         $taskExist = $this->task->find($request->id);
 
         if(!$taskExist) return false;
+
+        $taskUpdated = $taskExist->update($request->all());
+
+        if($taskUpdated > 0) return true;
+
+        return false;
+    }
+
+    public function updateStatus(TaskUpdateStatusRequest $request){
+        $taskExist = $this->task->find($request->id);
+
+        if($taskExist == null) return false;
 
         $taskUpdated = $taskExist->update($request->all());
 
