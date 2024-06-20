@@ -44,11 +44,7 @@ class TaskController extends Controller
     }
 
     public function update(TaskUpdateRequest $request){
-        $taskExist = $this->task->find($request->id);
-
-        if($taskExist == null) return response(['error'=>'task does not exist'])->setStatusCode(404);
-
-        $taskUpdated = $taskExist->update($request->all());
+        $taskUpdated = $this->service->update($request);
 
         if(!$taskUpdated) return response(['error'=>'task does not was updated'])->setStatusCode(401);
 

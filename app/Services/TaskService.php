@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
+use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 
@@ -35,6 +36,18 @@ class TaskService{
         $resource = new TaskResource($taskCreated);
 
         return $resource;
+    }
+
+    public function update(TaskUpdateRequest $request){
+        $taskExist = $this->task->find($request->id);
+
+        if(!$taskExist) return false;
+
+        $taskUpdated = $taskExist->update($request->all());
+
+        if($taskUpdated > 0) return true;
+
+        return false;
     }
 
     public function destroy(TaskDeleteRequest $request){
