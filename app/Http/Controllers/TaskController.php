@@ -22,9 +22,7 @@ class TaskController extends Controller
     }
 
     public function index(){
-        return TaskResource::collection(
-            $this->task->all(),
-        );
+        return $this->service->index();
     }
 
     public function store(TaskRequest $request){

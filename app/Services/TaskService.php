@@ -16,6 +16,12 @@ class TaskService{
         $this->task = $task;
     }
 
+    public function index(){
+        return TaskResource::collection(
+            $this->task->all(),
+        );
+    }
+
     public function getById(int $id){
         $task = $this->task->find($id);
 
