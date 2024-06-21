@@ -41,10 +41,14 @@ class TaskRepository
 
         $taskCreated->items()->createMany($task->items);
 
-        // if ($task->items->isNotEmpty()) {
-        //     $taskCreated->items()->createMany($task->items);
-        // }
-
         return $taskCreated;
+    }
+
+    public function updateStatus(Task $task){
+        $taskUpdated = $task->update();
+
+        if($taskUpdated > 0) return true;
+
+        return false;
     }
 }
