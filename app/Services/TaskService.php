@@ -72,11 +72,9 @@ class TaskService
 
         if (!$taskExist) return false;
 
-        $taskDeleted = $taskExist->delete();
+        $taskDeleted = $this->repository->destroy($taskExist);
 
-        if ($taskDeleted > 0) return true;
-
-        return false;
+        return $taskDeleted;
     }
 
     private function convertToCreate(TaskRequest $request): Task

@@ -51,4 +51,12 @@ class TaskRepository
 
         return false;
     }
+
+    public function destroy(Task $task){
+        $taskDeleted = $task->delete();
+
+        if($taskDeleted > 0) return true;
+
+        return false;
+    }
 }
