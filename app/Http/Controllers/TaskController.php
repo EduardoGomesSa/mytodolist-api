@@ -47,7 +47,7 @@ class TaskController extends Controller
     public function updateStatus(TaskUpdateStatusRequest $request){
         $taskUpdated = $this->service->updateStatus($request);
 
-        if(!$taskUpdated) return response(['error'=>'status task does not was updated'])->setStatusCode(401);
+        if(!$taskUpdated) return response(['error'=>'status task does not was updated'])->setStatusCode(403);
 
         return response(['message'=>'status task updated with success'])->setStatusCode(200);
     }

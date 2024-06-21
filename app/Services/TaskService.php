@@ -57,13 +57,13 @@ class TaskService
     {
         $taskExist = $this->repository->getById($request->id);
 
-        if ($taskExist == null) return false;
+        if (!$taskExist) return false;
 
-        $taskUpdated = $taskExist->update($request->all());
+        $taskExist->status = $request['status'];
 
-        if ($taskUpdated > 0) return true;
+        $taskUpdated = $this->repository->updateStatus($taskExist);
 
-        return false;
+        return $taskUpdated;
     }
 
     public function destroy(TaskDeleteRequest $request)
