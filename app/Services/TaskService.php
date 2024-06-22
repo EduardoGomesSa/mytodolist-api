@@ -46,11 +46,9 @@ class TaskService
 
         if (!$taskExist) return false;
 
-        $taskUpdated = $taskExist->update($request->all());
+        $taskUpdated = $this->repository->update($this->convertToUpdate($request, $taskExist));
 
-        if ($taskUpdated > 0) return true;
-
-        return false;
+        return $taskUpdated;
     }
 
     public function updateStatus(TaskUpdateStatusRequest $request)
@@ -104,6 +102,22 @@ class TaskService
             }
 
             $task->setRelation('items', $items);
+        }
+
+        return $task;
+    }
+
+    private function convertToUpdate(TaskUpdateRequest $request, Task $task) : Task{
+        if($request->filled('name')){
+            $task->name = $request['name'];
+        }
+
+        if($request->filled('description')){
+            $task->description = $request['description'];
+        }
+
+        if($request->filled('status')){
+            $task->status = $request['status'];
         }
 
         return $task;

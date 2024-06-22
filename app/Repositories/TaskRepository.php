@@ -44,6 +44,14 @@ class TaskRepository
         return $taskCreated;
     }
 
+    public function update(Task $task){
+        $taskUpdated = $task->update();
+
+        if($taskUpdated > 0) return true;
+
+        return false;
+    }
+
     public function updateStatus(Task $task){
         $taskUpdated = $task->update();
 
