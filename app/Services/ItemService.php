@@ -43,15 +43,13 @@ class ItemService {
     }
 
     public function update(ItemUpdateRequest $request){
-        $itemExist = $this->item->find($request->id);
+        $itemExist = $this->repository->getById($request->id);
         
         if(!$itemExist) return false;
 
-        $itemUpdated = $itemExist->update($request->all());
-
-        if($itemUpdated > 0) return true;
-
-        return false;
+        $itemUpdated = $this->repository->update($this->convertToUpdate($request, $itemExist));
+        
+        return $itemUpdated;
     }
 
     public function updateStatus(ItemUpdateStatusRequest $request){
@@ -74,5 +72,21 @@ class ItemService {
         $itemDeleted = $this->repository->destroy($itemExist);
 
         return $itemDeleted;
+    }
+
+    private function convertToUpdate(ItemUpdateRequest $request, Item $item) : Item{
+        if($request->filled('name')){
+            $item->name = $request['name'];
+        }
+
+        if($request->filled('description')){
+            $item->description = $request['description'];
+        }
+
+        if($request->filled('status')){
+            $item->status = $request['status'];
+        }
+
+        return $item;
     }
 }

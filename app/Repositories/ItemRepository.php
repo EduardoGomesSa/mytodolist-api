@@ -23,6 +23,14 @@ class ItemRepository {
         return $item;
     }
 
+    public function update(Item $item){
+        $itemUpdated = $item->update();
+
+        if($itemUpdated > 0) return true;
+
+        return false;
+    }
+
     public function destroy(Item $item){
         $itemDeleted = $item->delete();
 
