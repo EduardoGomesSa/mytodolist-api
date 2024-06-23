@@ -43,11 +43,7 @@ class ItemController extends Controller
     }
 
     public function updateStatus(ItemUpdateStatusRequest $request){
-        $itemExist = $this->item->find($request->id);
-
-        if(!$itemExist) return response(["error"=>"item does not exist"])->setStatusCode(404);
-
-        $itemUpdated = $itemExist->update($request->all());
+        $itemUpdated = $this->service->updateStatus($request);
 
         if(!$itemUpdated) return response(["error"=>"item does not updated"])->setStatusCode(401);
 

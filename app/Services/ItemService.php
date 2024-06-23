@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
+use App\Http\Requests\ItemUpdateStatusRequest;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
 use App\Repositories\TaskRepository;
@@ -32,6 +33,18 @@ class ItemService {
     }
 
     public function update(ItemUpdateRequest $request){
+        $itemExist = $this->item->find($request->id);
+        
+        if(!$itemExist) return false;
+
+        $itemUpdated = $itemExist->update($request->all());
+
+        if($itemUpdated > 0) return true;
+
+        return false;
+    }
+
+    public function updateStatus(ItemUpdateStatusRequest $request){
         $itemExist = $this->item->find($request->id);
         
         if(!$itemExist) return false;
