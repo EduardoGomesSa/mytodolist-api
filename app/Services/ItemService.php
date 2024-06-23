@@ -67,14 +67,12 @@ class ItemService {
     }
 
     public function destroy(ItemDeleteRequest $request){
-        $itemExist = $this->item->find($request->id);
+        $itemExist = $this->repository->getById($request->id);
         
         if(!$itemExist) return false;
 
-        $itemDeleted = $itemExist->delete();
+        $itemDeleted = $this->repository->destroy($itemExist);
 
-        if($itemDeleted > 0) return true;
-
-        return false;
+        return $itemDeleted;
     }
 }
