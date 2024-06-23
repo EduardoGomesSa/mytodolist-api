@@ -48,20 +48,20 @@ class ItemService {
         if(!$itemExist) return false;
 
         $itemUpdated = $this->repository->update($this->convertToUpdate($request, $itemExist));
-        
+
         return $itemUpdated;
     }
 
     public function updateStatus(ItemUpdateStatusRequest $request){
-        $itemExist = $this->item->find($request->id);
+        $itemExist = $this->repository->getById($request->id);
         
         if(!$itemExist) return false;
 
-        $itemUpdated = $itemExist->update($request->all());
+        $itemExist->status = $request['status'];
 
-        if($itemUpdated > 0) return true;
-
-        return false;
+        $itemUpdated = $this->repository->update($itemExist);
+        
+        return $itemUpdated;
     }
 
     public function destroy(ItemDeleteRequest $request){
