@@ -12,11 +12,9 @@ use App\Services\ItemService;
 
 class ItemController extends Controller
 {
-    private $item;
     private $service;
 
-    public function __construct(Item $item, ItemService $service) {
-        $this->item = $item;
+    public function __construct(ItemService $service) {
         $this->service = $service;
     }
 
