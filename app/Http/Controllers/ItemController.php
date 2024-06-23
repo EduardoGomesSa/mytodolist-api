@@ -8,13 +8,16 @@ use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\ItemUpdateStatusRequest;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
+use App\Services\ItemService;
 
 class ItemController extends Controller
 {
     private $item;
+    private $service;
 
-    public function __construct(Item $item) {
+    public function __construct(Item $item, ItemService $service) {
         $this->item = $item;
+        $this->service = $service;
     }
 
     public function index(){
@@ -24,13 +27,11 @@ class ItemController extends Controller
     }
 
     public function store(ItemRequest $request){
-        $itemCreated = $this->item->create($request->all());
+        $itemCreated = $this->service->store($request);
 
         if(!$itemCreated) return response(['error'=>'item does not was created'])->setStatusCode(401);
 
-        $resource = new ItemResource($itemCreated);
-
-        return $resource->response()->setStatusCode(201);
+        return $itemCreated->response()->setStatusCode(201);
     }
 
     public function update(ItemUpdateRequest $request){
