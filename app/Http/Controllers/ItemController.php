@@ -51,11 +51,7 @@ class ItemController extends Controller
     }
 
     public function destroy(ItemDeleteRequest $request){
-        $itemExist = $this->item->find($request->id);
-
-        if(!$itemExist) return response(["error"=>"item does not exist"])->setStatusCode(404);
-
-        $itemDeleted = $itemExist->delete();
+        $itemDeleted = $this->service->destroy($request);
 
         if(!$itemDeleted) return response(["error"=>"item does not was deleted"])->setStatusCode(401);
 

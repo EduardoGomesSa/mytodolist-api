@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\ItemDeleteRequest;
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\ItemUpdateStatusRequest;
@@ -52,6 +53,18 @@ class ItemService {
         $itemUpdated = $itemExist->update($request->all());
 
         if($itemUpdated > 0) return true;
+
+        return false;
+    }
+
+    public function destroy(ItemDeleteRequest $request){
+        $itemExist = $this->item->find($request->id);
+        
+        if(!$itemExist) return false;
+
+        $itemDeleted = $itemExist->delete();
+
+        if($itemDeleted > 0) return true;
 
         return false;
     }
