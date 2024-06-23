@@ -19,6 +19,12 @@ class ItemService {
         $this->taskRepository = $taskRepository;
     }
 
+    public function index(){
+        return ItemResource::collection(
+            $this->item->all(),
+        );
+    }
+
     public function store(ItemRequest $request){
         $taskExist = $this->taskRepository->getById($request['task_id']);
 

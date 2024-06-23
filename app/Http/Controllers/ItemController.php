@@ -21,9 +21,7 @@ class ItemController extends Controller
     }
 
     public function index(){
-        return ItemResource::collection(
-            $this->item->all(),
-        );
+        return $this->service->index();
     }
 
     public function store(ItemRequest $request){
