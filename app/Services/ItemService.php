@@ -8,20 +8,23 @@ use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\ItemUpdateStatusRequest;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
+use App\Repositories\ItemRepository;
 use App\Repositories\TaskRepository;
 
 class ItemService {
     private Item $item;
+    private ItemRepository $repository;
     private TaskRepository $taskRepository;
 
-    public function __construct(Item $item, TaskRepository $taskRepository) {
+    public function __construct(Item $item, ItemRepository $repository, TaskRepository $taskRepository) {
         $this->item = $item;
+        $this->repository = $repository;
         $this->taskRepository = $taskRepository;
     }
 
     public function index(){
         return ItemResource::collection(
-            $this->item->all(),
+            $this->repository->index(),
         );
     }
 
