@@ -52,14 +52,6 @@ class TaskRepository
         return false;
     }
 
-    public function updateStatus(Task $task){
-        $taskUpdated = $task->update();
-
-        if($taskUpdated > 0) return true;
-
-        return false;
-    }
-
     public function destroy(Task $task){
         $taskDeleted = $task->delete();
 

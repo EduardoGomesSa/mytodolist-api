@@ -57,7 +57,7 @@ class TaskService
 
         $taskExist->status = $request['status'];
 
-        $taskUpdated = $this->repository->updateStatus($taskExist);
+        $taskUpdated = $this->repository->update($taskExist);
 
         return $taskUpdated;
     }
