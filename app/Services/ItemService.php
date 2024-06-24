@@ -13,13 +13,11 @@ use App\Repositories\TaskRepository;
 
 class ItemService
 {
-    private Item $item;
     private ItemRepository $repository;
     private TaskRepository $taskRepository;
 
-    public function __construct(Item $item, ItemRepository $repository, TaskRepository $taskRepository)
+    public function __construct(ItemRepository $repository, TaskRepository $taskRepository)
     {
-        $this->item = $item;
         $this->repository = $repository;
         $this->taskRepository = $taskRepository;
     }
