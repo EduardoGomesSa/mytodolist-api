@@ -23,7 +23,7 @@ class ItemRequest extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'description'=>'nullable|string',
+            'description'=>'sometimes|string',
             'status'=>'required|string',
             'task_id'=>'required|numeric',
         ];
