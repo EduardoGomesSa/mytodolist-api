@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AuthCOntroller extends Controller
+class AuthController extends Controller
 {
     private User $user;
 
