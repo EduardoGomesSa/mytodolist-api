@@ -59,4 +59,11 @@ class AuthCOntroller extends Controller
             return new UserResource($user);
         }
     }
+
+    public function logout() {
+        $user = Auth()->user;
+        $user->tokens()->delete();
+
+        return response(['message'=>'logout realizado com sucesso'], 200);
+    }
 }
