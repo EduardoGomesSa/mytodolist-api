@@ -21,6 +21,7 @@ class TaskController extends Controller
     }
 
     public function store(TaskRequest $request){
+        $request['status'] = 'ativo';
         $taskCreated = $this->service->store($request);
 
         if(!$taskCreated) return response(['error'=>'task does not was created'])->setStatusCode(401);

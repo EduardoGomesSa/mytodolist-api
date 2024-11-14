@@ -23,8 +23,7 @@ class TaskRequest extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'description'=>'nullable|string',
-            'status'=>'nullable|string',
+            'description'=>'nullable|string'
         ];
     }
 }
