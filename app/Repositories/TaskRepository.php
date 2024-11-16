@@ -15,7 +15,9 @@ class TaskRepository
 
     public function index()
     {
-        return $this->task->all();
+        return $this->task->orderByRaw("FIELD(status, 'ativo', 'inativo')")
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function getById(int $id)
@@ -31,31 +33,33 @@ class TaskRepository
     {
         $taskCreated = $this->task->create([
             'name' => $task->name,
-            'description'=> $task->description,
-            'start_date'=> $task->start_date,
-            'end_date'=> $task->end_date ? $task->end_date : null,
-            'status'=> $task->status,
+            'description' => $task->description,
+            'start_date' => $task->start_date,
+            'end_date' => $task->end_date ? $task->end_date : null,
+            'status' => $task->status,
         ]);
 
-        if(!$taskCreated) return null;
+        if (!$taskCreated) return null;
 
         $taskCreated->items()->createMany($task->items);
 
         return $taskCreated;
     }
 
-    public function update(Task $task){
+    public function update(Task $task)
+    {
         $taskUpdated = $task->update();
 
-        if($taskUpdated > 0) return true;
+        if ($taskUpdated > 0) return true;
 
         return false;
     }
 
-    public function destroy(Task $task){
+    public function destroy(Task $task)
+    {
         $taskDeleted = $task->delete();
 
-        if($taskDeleted > 0) return true;
+        if ($taskDeleted > 0) return true;
 
         return false;
     }
