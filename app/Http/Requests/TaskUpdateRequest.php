@@ -23,9 +23,8 @@ class TaskUpdateRequest extends FormRequest
     {
         return [
             'id'=>'required|numeric',
-            'name'=>'sometimes|required|string',
-            'description'=>'sometimes|required|string',
-            'status'=>'sometimes|required|string',
+            'name'=>'sometimes|nullable|string',
+            'description'=>'sometimes|nullable|string',
         ];
     }
 }
