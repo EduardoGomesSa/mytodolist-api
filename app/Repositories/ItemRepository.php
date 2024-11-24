@@ -13,9 +13,9 @@ class ItemRepository
         $this->item = $item;
     }
 
-    public function index()
+    public function index(int $task_id)
     {
-        return $this->item->all();
+        return $this->item->where('task_id', $task_id)->get();
     }
 
     public function getById(int $id)

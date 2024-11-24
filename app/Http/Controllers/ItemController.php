@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ItemDeleteRequest;
+use App\Http\Requests\ItemGetRequest;
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\ItemUpdateStatusRequest;
@@ -16,8 +17,8 @@ class ItemController extends Controller
         $this->service = $service;
     }
 
-    public function index(){
-        return $this->service->index();
+    public function index(ItemGetRequest $request){
+        return $this->service->index($request);
     }
 
     public function store(ItemRequest $request){

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\ItemDeleteRequest;
+use App\Http\Requests\ItemGetRequest;
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\ItemUpdateStatusRequest;
@@ -22,10 +23,10 @@ class ItemService
         $this->taskRepository = $taskRepository;
     }
 
-    public function index()
+    public function index(ItemGetRequest $request)
     {
         return ItemResource::collection(
-            $this->repository->index(),
+            $this->repository->index($request->task_id),
         );
     }
 
