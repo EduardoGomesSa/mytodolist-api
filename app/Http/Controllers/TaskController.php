@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskByIdRequest;
 use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskUpdateRequest;
@@ -18,6 +19,13 @@ class TaskController extends Controller
 
     public function index(){
         return $this->service->index();
+    }
+
+    public function getById(TaskByIdRequest $request){
+        $task = $this->service->getById($request);
+        if(!$task) return response(['error' => 'task does not found'], 404);
+
+        return $task->response()->setStatusCode(200);
     }
 
     public function store(TaskRequest $request){

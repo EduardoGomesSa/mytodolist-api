@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\TaskByIdRequest;
 use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskUpdateRequest;
@@ -25,6 +26,14 @@ class TaskService
         return TaskResource::collection(
             $this->repository->index(),
         );
+    }
+
+    public function getById(TaskByIdRequest $request) {
+        $task = $this->repository->getById($request->id);
+
+        if(!$task) return null;
+
+        return new TaskResource($task);
     }
 
     public function store(TaskRequest $request)

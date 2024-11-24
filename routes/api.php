@@ -13,6 +13,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/validate-token', [AuthController::class, 'validateToken']);
 
     Route::get('/tasks', [TaskController::class, 'index']);
+    Route::get('/tasks/byid', [TaskController::class, 'getById']);
     Route::post('/tasks', [TaskController::class, 'store']);
     Route::delete('/tasks', [TaskController::class, 'destroy']);
     Route::put('/tasks', [TaskController::class, 'update']);
