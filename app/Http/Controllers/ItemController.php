@@ -22,6 +22,7 @@ class ItemController extends Controller
     }
 
     public function store(ItemRequest $request){
+        $request['status'] = 'ativo';
         $itemCreated = $this->service->store($request);
 
         if(!$itemCreated) return response(['error'=>'item does not was created'])->setStatusCode(401);
