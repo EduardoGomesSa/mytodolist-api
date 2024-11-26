@@ -88,10 +88,6 @@ class ItemService
             'task_id' => $request->task_id,
         ]);
 
-        if($request->filled('description')){
-            $item->description = $request['description'];
-        }
-
         return $item;
     }
 
@@ -99,10 +95,6 @@ class ItemService
     {
         if ($request->filled('name')) {
             $item->name = $request['name'];
-        }
-
-        if ($request->filled('description')) {
-            $item->description = $request['description'];
         }
 
         if ($request->filled('status')) {

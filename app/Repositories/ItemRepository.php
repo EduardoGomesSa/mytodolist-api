@@ -31,7 +31,6 @@ class ItemRepository
     {
         $itemCreated = $this->item->create([
             'name' => $item->name,
-            'description' => $item->description ?? null,
             'status' => $item->status,
             'task_id' => $item->task_id,
         ]);
