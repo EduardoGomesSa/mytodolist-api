@@ -2,7 +2,7 @@
 
 ## Sobre o projeto:
 
-Essa api foi desenvolvida para ser o backend de uma aplicação de mesmo nome. Ela é a responsável por executar validações, conversões e manipulação da base de dados.
+Api desenvolvida para ser o backend de uma aplicação de mesmo nome. Ela é a responsável por executar validações, conversões e manipulação da base de dados.
 
 ## Tecnologias utilizadas: 
 - ``Laravel 11``
