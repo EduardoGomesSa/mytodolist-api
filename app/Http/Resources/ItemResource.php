@@ -19,7 +19,7 @@ class ItemResource extends JsonResource
             'name'=>$this->name,
             'description'=>$this->description,
             'status'=>$this->status,
-            // 'task_id'=>$this->task_id,
+            'task_id'=>$this->task_id,
         ];
     }
 }
