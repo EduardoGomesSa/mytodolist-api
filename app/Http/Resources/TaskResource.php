@@ -20,7 +20,12 @@ class TaskResource extends JsonResource
             'description'=>$this->description,
             'status'=>$this->status,
             'created_at'=>$this->created_at,
-            'items'=>ItemResource::collection($this->items),
+            'items'=>ItemResource::collection(
+                $this->items()
+            ->orderByRaw("FIELD(status, 'ativo', 'inativo')")
+            ->orderBy('created_at', 'desc')
+            ->get()
+        ),
         ];
     }
 }
