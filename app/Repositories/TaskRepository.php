@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TaskRepository
 {
@@ -15,7 +16,11 @@ class TaskRepository
 
     public function index()
     {
-        return $this->task->orderByRaw("FIELD(status, 'ativo', 'inativo')")
+        $user = Auth::user();
+
+        return $this->task
+            ->where('')
+            ->orderByRaw("FIELD(status, 'ativo', 'inativo')")
             ->orderBy('created_at', 'desc')
             ->get();
     }

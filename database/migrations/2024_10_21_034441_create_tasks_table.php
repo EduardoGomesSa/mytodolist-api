@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('status')->default('ativo');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
             $table->timestamps();
         });
     }
