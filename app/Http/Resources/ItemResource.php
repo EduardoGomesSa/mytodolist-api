@@ -17,7 +17,6 @@ class ItemResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'description'=>$this->description,
             'status'=>$this->status,
             'task_id'=>$this->task_id,
         ];

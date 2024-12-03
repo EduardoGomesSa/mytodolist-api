@@ -23,9 +23,7 @@ class ItemUpdateRequest extends FormRequest
     {
         return [
             'id'=>'required|numeric',
-            'name'=>'sometimes|string',
-            'description'=>'sometimes|nullable|string',
-            'status'=>'sometimes|string',
+            'name'=>'sometimes|string'
         ];
     }
 }
