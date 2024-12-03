@@ -16,10 +16,10 @@ class TaskRepository
 
     public function index()
     {
-        $user = Auth::user();
+        $user = auth('sanctum')->user();
 
         return $this->task
-            ->where('')
+            ->where('user_id', $user->id)
             ->orderByRaw("FIELD(status, 'ativo', 'inativo')")
             ->orderBy('created_at', 'desc')
             ->get();
@@ -36,12 +36,15 @@ class TaskRepository
 
     public function store(Task $task)
     {
+        $user = auth('sanctum')->user();
+
         $taskCreated = $this->task->create([
             'name' => $task->name,
             'description' => $task->description,
             'start_date' => $task->start_date,
             'end_date' => $task->end_date ? $task->end_date : null,
             'status' => $task->status,
+            'user_id' => $user->id,
         ]);
 
         if (!$taskCreated) return null;
