@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\DeleteRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -67,7 +68,7 @@ class AuthController extends Controller
         return response(['message'=>'logout realizado com sucesso'], 200);
     }
 
-    public function destroy(Request $request) {
+    public function destroy(DeleteRequest $request) {
         $user = $this->user->find($request->id);
 
         if(!$user) return response(['error' => 'usuario nao existe'], 404);
