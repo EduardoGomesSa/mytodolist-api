@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskByIdRequest;
 use App\Http\Requests\TaskDeleteRequest;
+use App\Http\Requests\TaskMultiStoreRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Requests\TaskUpdateStatusRequest;
@@ -39,7 +40,7 @@ class TaskController extends Controller
         return $taskCreated->response()->setStatusCode(201);
     }
 
-    public function storeAll(Request $request){
+    public function storeAll(TaskMultiStoreRequest $request){
         $createds = [];
         $user = auth('sanctum')->user();
         foreach($request->all() as $task){
