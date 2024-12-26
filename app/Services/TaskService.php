@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\TaskByIdRequest;
 use App\Http\Requests\TaskDeleteRequest;
+use App\Http\Requests\TaskMultiStoreRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Requests\TaskUpdateStatusRequest;
@@ -47,6 +48,10 @@ class TaskService
         return $resource;
     }
 
+    public function storeAll(TaskMultiStoreRequest $request) {
+
+    }
+
     public function update(TaskUpdateRequest $request)
     {
         $taskExist = $this->repository->getById($request->id);
@@ -87,13 +92,8 @@ class TaskService
         $task = new Task([
             'name' => $request->name,
             'description' => $request->description,
-            'start_date' => $request->start_date,
             'status' => $request->status,
         ]);
-
-        if ($request->filled('end_date')) {
-            $task->end_date = $request->end_date;
-        }
 
         if ($request->filled('items')) {
             $items = [];
@@ -101,7 +101,6 @@ class TaskService
             foreach ($request->input('items') as $item) {
                 $item = new Item([
                     'name' => $item['name'],
-                    'description' => $item['description'],
                     'status' => $item['status'],
                 ]);
 

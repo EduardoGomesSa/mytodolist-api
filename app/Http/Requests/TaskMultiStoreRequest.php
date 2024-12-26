@@ -22,9 +22,9 @@ class TaskMultiStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            '*.name' => 'required|string|max:255', // Cada task deve ter um title obrigatório e não vazio
-            '*.items' => 'nullable|array', // Items são opcionais, mas devem ser um array se existirem
-            '*.items.*.name' => 'required_with:*.items|string|max:255', // Se itens existirem, cada item deve ter um campo name obrigatório
+            '*.name' => 'required|string|max:255',
+            '*.items' => 'nullable|array',
+            '*.items.*.name' => 'required_with:*.items|string|max:255',
         ];
     }
 }
