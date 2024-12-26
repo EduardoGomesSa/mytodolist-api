@@ -7,7 +7,9 @@ use App\Http\Requests\TaskDeleteRequest;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Requests\TaskUpdateStatusRequest;
+use App\Models\Task;
 use App\Services\TaskService;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -35,6 +37,21 @@ class TaskController extends Controller
         if(!$taskCreated) return response(['error'=>'task does not was created'])->setStatusCode(401);
 
         return $taskCreated->response()->setStatusCode(201);
+    }
+
+    public function storeAll(Request $request){
+        $createds = [];
+        $user = auth('sanctum')->user();
+        foreach($request->all() as $task){
+            $task['user_id'] = $user->id;
+            $createds[] = Task::create($task);
+        }
+
+        if(count($createds) > 0) {
+            return response(['error'=>'tasks created with success'])->setStatusCode(201);
+        }
+
+        return response(['error'=>'task does not was created'])->setStatusCode(401);
     }
 
     public function destroy(TaskDeleteRequest $request){
