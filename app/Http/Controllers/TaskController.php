@@ -44,7 +44,13 @@ class TaskController extends Controller
         $user = auth('sanctum')->user();
         foreach($request->all() as $task){
             $task['user_id'] = $user->id;
-            $createds[] = Task::create($task);
+            $taskCreated = Task::create($task);
+
+            if($taskCreated && isset($task['items']) && is_array($task['items'])) {
+                $taskCreated->items()->createMany($task['items']);
+            }
+
+            $createds[] = $taskCreated;
         }
 
         if(count($createds) > 0) {
