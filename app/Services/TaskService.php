@@ -12,6 +12,7 @@ use App\Http\Resources\TaskResource;
 use App\Models\Item;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
+use Illuminate\Http\Request;
 
 class TaskService
 {
@@ -48,8 +49,22 @@ class TaskService
         return $resource;
     }
 
-    public function storeAll(TaskMultiStoreRequest $request) {
+    public function storeAll(Request $request) {
+        $createds = [];
+        $user = auth('sanctum')->user();
+        foreach($request->all() as $task){
+            $task = $this->convertToCreate($request);
+            $task->user_id = $user->id;
+            $taskCreated = $this->repository->store($task);
+            //$task['user_id'] = $user->id;
+            //$taskCreated = Task::create($task);
 
+            // if($taskCreated && isset($task['items']) && is_array($task['items'])) {
+            //     $taskCreated->items()->createMany($task['items']);
+            // }
+
+            $createds[] = $taskCreated;
+        }
     }
 
     public function update(TaskUpdateRequest $request)

@@ -40,7 +40,7 @@ class TaskController extends Controller
         return $taskCreated->response()->setStatusCode(201);
     }
 
-    public function storeAll(TaskMultiStoreRequest $request){
+    public function storeAll(Request $request){
         $createds = [];
         $user = auth('sanctum')->user();
         foreach($request->all() as $task){
