@@ -10,7 +10,6 @@ Api desenvolvida para ser o backend de uma aplicação de mesmo nome. Ela é a r
 - ``MySQL``
 - ``MVC``
 - ``Insomnia``
-- ``PHPMyAdmin``
 
 ## Comandos para inicialização
 Instala as dependências e pacotes do projeto
