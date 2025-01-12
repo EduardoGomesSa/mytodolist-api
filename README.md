@@ -9,7 +9,6 @@ Api desenvolvida para ser o backend de uma aplicação de mesmo nome. Ela é a r
 - ``Eloquent ORM``
 - ``MySQL``
 - ``MVC``
-- ``Insomnia``
 
 ## Comandos para inicialização
 Instala as dependências e pacotes do projeto
