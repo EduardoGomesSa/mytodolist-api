@@ -2,7 +2,7 @@
 
 ## Sobre o projeto:
 
-Api desenvolvida para ser o backend de uma aplicação de mesmo nome. Ela é a responsável por executar validações, conversões e manipulação da base de dados MySQL.
+Api desenvolvida para ser o backend de uma aplicação mobile em Flutter. Ela é a responsável por executar validações, conversões e manipulação da base de dados MySQL.
 
 ## Tecnologias utilizadas: 
 - ``Laravel 11``
