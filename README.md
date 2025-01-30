@@ -7,6 +7,7 @@ Api desenvolvida para ser o backend de uma aplicação mobile em Flutter. Ela é
 ## Tecnologias utilizadas: 
 - ``Laravel 11``
 - ``Eloquent ORM``
+- ``Pest``
 - ``MySQL``
 - ``MVC``
 
