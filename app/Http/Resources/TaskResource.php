@@ -20,6 +20,7 @@ class TaskResource extends JsonResource
             'description'=>$this->description,
             'status'=>$this->status,
             'created_at'=>$this->created_at,
+            'updated_at'=>$this->updated_at,
             'user_id' => $this->user_id,
             'items'=>ItemResource::collection(
                 $this->items()
