@@ -28,7 +28,7 @@ class TaskController extends Controller
         $task = $this->service->getById($request);
         if(!$task) return response(['error' => 'task does not found'], 404);
 
-        return $task->response()->setStatusCode(200);
+        return response()->json($task, 200);
     }
 
     public function store(TaskRequest $request){
