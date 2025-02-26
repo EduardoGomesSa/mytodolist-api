@@ -11,12 +11,13 @@
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.5.36",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.39",
-        "pestphp/pest-plugin-laravel": "^2.4"
+        "mockery/mockery": "^1.6",
+        "pestphp/pest-plugin-laravel": "^2.4",
+        "phpunit/phpunit": "^10.5.36"
     },
     "autoload": {
         "psr-4": {
