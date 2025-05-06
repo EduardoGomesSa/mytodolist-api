@@ -29,6 +29,10 @@ Executa o projeto, tornando-o acessível
   php artisan serve
 ```
 
+## Estrutura do projeto
+![image](https://github.com/user-attachments/assets/6fb47ff9-df67-4b24-a371-40faee3d1a90)
+
+
 ## Endpoints
 get ``/api/tasks`` Realiza a busca de todas as tarefas
 
