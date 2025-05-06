@@ -11,7 +11,8 @@ Api desenvolvida para ser o backend de uma aplicação mobile em Flutter. Ela é
 - ``MySQL``
 - ``MVC``
 
-## Comandos para inicialização
+## Comandos para inicialização 
+### Local
 Instala as dependências e pacotes do projeto
 ```bash
   composer install
@@ -27,6 +28,24 @@ Executa as migrations, criando ou atualizando o banco e tabelas no banco de dado
 Executa o projeto, tornando-o acessível
 ```bash
   php artisan serve
+```
+
+### Docker
+Instala as dependências e pacotes do projeto
+```bash
+  sail composer install
+```
+Renomeie o arquivo .env.example para ``.env`` e gere uma nova chave da API
+```bash
+  sail artisan key:generate
+```
+Executa as migrations, criando ou atualizando o banco e tabelas no banco de dados 
+```bash
+  sail artisan migrate
+```
+Executa o projeto, tornando-o acessível
+```bash
+  sail artisan serve
 ```
 
 ## Estrutura do projeto
